@@ -1,0 +1,114 @@
+{% extends 'cushome.html' %}
+{% block body %}
+<style>
+    td,th{
+        padding: 20px;
+    }
+</style>
+<br>
+<center>
+    <hr>
+<h1>New arrivals</h1>
+<hr>
+<div >
+<table style="width: 700px;">
+    {% for d in car %}
+    <tr>
+        <td>
+            <a href="../static{{d.12}}" target="_blank">
+                <img width="300px" height="200px" style="border-radius: 50%;" src="../static{{d.12}}">
+            </a>
+        </td>
+        <td>
+            <h1>{{d.1}}</h1>
+            <p>Model : {{d.3}}</p>
+            <p>Type : {{d.4}}</p>
+            <p>Fuel : {{d.5}}</p>
+            <p>Torque : {{d.6}}</p>
+            <p>HP : {{d.7}}</p>
+            <p>Colors : {{d.8}}</p>
+            <p>Ground clearance : {{d.10}}</p>
+            <p>Tyre size : {{d.11}}</p>
+            <p>Price : Rs.{{d.9}}/-</p>
+            <p>Total reviews: {{count}}</p>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% if count > 0 %}
+{% if status == "Active" %}
+<div id="chart_div" style="margin: 20px;">
+        
+</div>
+<table>
+    <tr>
+<td><label>Engine and performance:</label></td>
+<td><progress id="file" value="{{engine}}" max="10"> {{engine}} </progress></td>
+    </tr>
+    <tr>
+<td><label>Ride and handling:</label></td>
+<td><progress id="file" value="{{ride}}" max="10"> {{ride}} </progress></td>
+</tr>
+<tr>
+    <td>
+<label>Interior space and comfort:</label></td>
+<td>
+<progress id="file" value="{{interior}}" max="10"> {{interior}} </progress></td>
+</tr>
+<tr>
+    <td>
+<label>Features and equipment:</label></td>
+<td>
+<progress id="file" value="{{feature}}" max="10"> {{feature}} </progress>
+</td>
+</tr>
+</table>
+{% else %}
+<p>Please subscribe or renew your account to view the review</p>
+{% endif %}
+{% endif %}
+
+</div>
+</center>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+     <script type="text/javascript">
+ 
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawChart);
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+        
+ 
+  
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows([
+          ['Good reviews', {{score.0.0}}],
+          ['Bad Reviews', {{score.1.0}}],
+         
+        ]);
+
+        // Set chart options
+        var options = {'title':'Review summary',
+                       'width':400,
+                       'height':300};
+
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+      
+
+    </script> 
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'adminhome.html' %}
+{% block body %}
+<br>
+<center>
+<hr>
+<h1>Review for approval</h1>
+<hr>
+</center>
+<table class="table">
+<tr><th>CAR</th><th>REVIEW</th><th>RATING</th><th>DATE</th><th>EXPERT</th><th></th></tr>
+{% for d in data %}
+<tr><td>{{d.10}}</td><td>{{d.1}}</td><td>{{d.2}}</td><td>{{d.4}}</td><td>{{d.9}}</td><td><a href="/adminreviewmore?id={{d.0}}">View more</a> </td></tr>
+{% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'experthome.html' %}
+{% block body %}
+<style>
+    td{
+        padding: 10px;
+    }
+</style>
+<center>
+<form method="POST">
+    <hr>
+    <h1>Profile</h1>
+    <hr>
+    {% csrf_token %}
+    <table>
+        {% for d in data %}
+        <tr><td>Name</td><td><input type="text" value="{{d.1}}" required class="form-control" name="t3"></td></tr>
+        <tr><td>Email</td><td><input type="text" value="{{d.2}}" required class="form-control" name="t4"></td></tr>
+        <tr><td>Mob</td><td><input type="text" value="{{d.3}}" required class="form-control" name="t5"></td></tr>
+        <tr><td>Experiance</td><td><select name="t6" required class="form-control" id="">
+            {% if d.5 == "1Year" %}
+            <option value="1Year" selected>1Year</option>
+            {% else %}
+            <option value="1Year">1Year</option>
+            {% endif %}
+            {% if d.5 == "2Year" %}
+            <option value="2Year" selected>2Year</option>
+            {% else %}
+            <option value="2Year">2Year</option>
+            {% endif %}
+            {% if d.5 == "3Year" %}
+            <option value="3Year" selected>3Year</option>
+            {% else %}
+            <option value="3Year">3Year</option>
+            {% endif %}
+            {% if d.5 == "3+Year" %}
+            <option value="3+Year" selected>3+Year</option>
+            {% else %}
+            <option value="3+Year">3+Year</option>
+            {% endif %}
+        </select></td></tr>
+        <tr><td>Area Of Experiance</td><td><input type="text" value="{{d.6}}" required class="form-control" name="t7"></td></tr>
+    {% endfor %}
+        <tr><td></td><td><input type="submit" name="b1" class="btn btn-primary" value="UPDATE"></td></tr>
+    </table>
+</form>
+</center>
+{% endblock %}
